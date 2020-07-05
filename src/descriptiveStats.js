@@ -60,9 +60,7 @@ function DescitptiveStats(props) {
         }
         fetchData();
     },[])// eslint-disable-line react-hooks/exhaustive-deps
-
     const classes = useStyles();
-
     if(isLoading){
         return(
             <Grid container justify="center" direction="column" alignItems="center">
