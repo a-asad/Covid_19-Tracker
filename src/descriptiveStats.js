@@ -83,7 +83,7 @@ function DescitptiveStats(props) {
         );
     }
   return (
-    <div className={classes.pad}>
+    <div style={{paddingTop:20}}>
         <Grid container justify="center" alignItems="center">
             <Grid item >
                 <Typography variant="h4">C</Typography>

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Pie} from 'react-chartjs-2';
+import { Grid } from '@material-ui/core';
 
 function Chart(props) {
     const data = {
@@ -23,8 +24,12 @@ function Chart(props) {
         }]
     };
     return (
-      <div style={{maxWidth:"70%",margin:"auto", marginTop:"20px",marginBottom:"20px"}}>
-        <Pie data={data} />
+      <div>
+        <Grid container justify="center">
+          <Grid item xs={8} sm={4}>
+            <Pie data={data} width={100} height={100}/>
+          </Grid>
+        </Grid>
       </div>
     )
   }
