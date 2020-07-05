@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(3),
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
@@ -46,26 +46,28 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function DescitptiveStats() {
-    let [dt, setDt] = useState({total:0, recovered:0, active:0, totalDeath:0, deathToday:0});
+function DescitptiveStats(props) {
+    let dt = props.data;
+    let setDt = props.setData;
+    let [isLoading, setLoading] = useState(true);
     useEffect(()=>{
         async function fetchData(){
             let resp = await fetch('https://api.thevirustracker.com/free-api?global=stats');
             resp = await resp.json();
-            setDt({total:resp.results[0].total_cases, recovered:resp.results[0].total_recovered, active:resp.results[0].total_unresolved,
+            setDt({total:resp.results[0].total_cases, recovered:resp.results[0].total_recovered,
                  totalDeath:resp.results[0].total_deaths, deathToday:resp.results[0].total_new_deaths_today});
-                 console.log(resp.results[0]);
+                 setLoading(false);
         }
         fetchData();
-    },[]);
+    },[])// eslint-disable-line react-hooks/exhaustive-deps
 
     const classes = useStyles();
 
-    if(!dt.total){
+    if(isLoading){
         return(
-            <Grid container justify="center" direction="column" alignItems="center" className={classes.pad}>
+            <Grid container justify="center" direction="column" alignItems="center">
                 <Grid container justify="center" alignItems="center" className={classes.pad}>
-                    <Grid item >
+                    <Grid item>
                         <Typography variant="h4">C</Typography>
                     </Grid>
                     <Grid item>
@@ -76,7 +78,7 @@ function DescitptiveStats() {
                     </Grid>
                 </Grid>
                 <Grid item>
-                    <Typography variant="h5" className={classes.pad}>LOADING DATA...</Typography>
+                    <Typography variant="h6" className={classes.pad}>LOADING DATA...</Typography>
                 </Grid>
             </Grid>
             
@@ -84,7 +86,7 @@ function DescitptiveStats() {
     }
   return (
     <div className={classes.pad}>
-        <Grid container justify="center" alignItems="center" className={classes.pad}>
+        <Grid container justify="center" alignItems="center">
             <Grid item >
                 <Typography variant="h4">C</Typography>
             </Grid>
@@ -95,41 +97,30 @@ function DescitptiveStats() {
                 <Typography variant="h4">VID-19 TRACKER</Typography>
             </Grid>
         </Grid>
-      <div className={classes.root}>
+      <div className={cx(classes.root,classes.pad)}>
       <Grid container spacing={2} alignItems="center" justify="center" className={classes.pad}>
-        <Grid item xs={12} sm={3} md={2}>
+        <Grid item xs={12} sm={3}>
           <Paper elevation="3" className={cx(classes.paper,classes.total)}>
-              <Typography variant="h6">TOTAL CASES</Typography>
+              <Typography variant="h6">TOTAL</Typography>
               <CountUp start={0} end={dt.total} duration={3} separator=","/>
-              <Typography>TOTAL</Typography>
               </Paper>
         </Grid>
-        <Grid item xs={12} sm={3} md={2}>
-          <Paper elevation="3" className={cx(classes.paper,classes.active)}>
-              <Typography variant="h6">INFECTED NOW</Typography>
-              <CountUp start={0} end={dt.active} duration={3} separator=","/>
-              <Typography>ACTIVE</Typography>
-              </Paper>
-        </Grid>
-        <Grid item xs={12} sm={3} md={2}>
+        <Grid item xs={12} sm={3}>
           <Paper elevation="3" className={cx(classes.paper,classes.recovered)}>
               <Typography variant="h6">RECOVERED</Typography>
               <CountUp start={0} end={dt.recovered} duration={3} separator=","/>
-              <Typography>RECOVERED</Typography>
               </Paper>
         </Grid>
-        <Grid item xs={12} sm={3} md={2}>
+        <Grid item xs={12} sm={3}>
           <Paper elevation="3" className={cx(classes.paper,classes.death)}>
               <Typography variant="h6">TOTAL DEATHS</Typography>
               <CountUp start={0} end={dt.totalDeath} duration={3} separator=","/>
-              <Typography>TOTAL DEATHS</Typography>
             </Paper>
         </Grid> 
-        <Grid item xs={12} sm={3} md={2}>
+        <Grid item xs={12} sm={3} >
           <Paper elevation="3" className={cx(classes.paper,classes.deathToday)}>
               <Typography variant="h6">DEATHS TODAY</Typography>
               <CountUp start={0} end={dt.deathToday} duration={3} separator=","/>
-              <Typography>DEATHS TODAY</Typography>
               </Paper>
         </Grid>
       </Grid>
