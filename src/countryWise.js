@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Grid, makeStyles, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+import {Grid, makeStyles, FormControl, InputLabel, Select } from '@material-ui/core';
 import cx from 'classnames';
 
 const useStyles = makeStyles((theme) => ({
@@ -66,10 +66,10 @@ function CountryWise(props){
             <Grid container justify="center" alignItems="center" direction="column" className={classes.pad}>
                 <Grid item>
                     <FormControl className={cx(classes.formControl,classes.select)}>
-                        <InputLabel id="country">Country</InputLabel>
-                        <Select labelId="country" id="countrySelect" value={cCode} onChange={getCountry}>
-                        <MenuItem value="G">Global</MenuItem>
-                        {Object.keys(countries).map((c,id)=> <MenuItem key={id} value={countries[c].code}>{countries[c].title}</MenuItem>)}
+                        <InputLabel htmlFor="countrySelect">Country</InputLabel>
+                        <Select native inputProps={{  name: 'age',  id: 'countrySelect',}} value={cCode} onChange={getCountry}>
+                        <option value="G">Global</option>
+                        {Object.keys(countries).map((c,id)=> <option key={id} value={countries[c].code}>{countries[c].title}</option>)}
                         </Select>
                     </FormControl>
                 </Grid>
