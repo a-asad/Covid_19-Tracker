@@ -25,7 +25,7 @@ function Chart(props) {
     };
     return (
       <div>
-        <Grid container justify="center">
+        <Grid container justify="center" style={{marginBottom:'35px'}}>
           <Grid item xs={8} sm={4}>
             <Pie data={data} width={100} height={100}/>
           </Grid>
