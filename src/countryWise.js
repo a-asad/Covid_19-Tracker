@@ -25,15 +25,15 @@ const useStyles = makeStyles((theme) => ({
 
 function CountryWise(props){
     const classes = useStyles();
-    let [countries,setCountries] = useState({});
+    let [countries,setCountries] = useState();
     let [isLoading, setLoading] = useState(true);
     let [cCode, setCcode] = useState('G');
     let setData = props.setData;
     useEffect(()=>{
         async function fetchData(){
-            let resp = await fetch('https://api.thevirustracker.com/free-api?countryTotals=ALL');
+            let resp = await fetch('https://covid19.mathdro.id/api/countries');
             resp = await resp.json();
-            setCountries(resp.countryitems[0]);
+            setCountries(resp.countries);
             setLoading(false);
         }
         fetchData();
@@ -44,16 +44,17 @@ function CountryWise(props){
         setCcode(c);
         async function fetchData(){
             if(c === 'G'){
-                let resp = await fetch('https://api.thevirustracker.com/free-api?global=stats');
+                let resp = await fetch('https://covid19.mathdro.id/api');
                 resp = await resp.json();
-                setData({total:resp.results[0].total_cases, recovered:resp.results[0].total_recovered,
-                     totalDeath:resp.results[0].total_deaths, deathToday:resp.results[0].total_new_deaths_today});
+                setData({total:resp.confirmed.value, recovered:resp.recovered.value,
+                     totalDeath:resp.deaths.value});
             }
             else{
-                let resp = await fetch('https://api.thevirustracker.com/free-api?countryTotal='+c);
+                let resp = await fetch('https://covid19.mathdro.id/api/countries/'+c);
+                
                 resp = await resp.json();
-                setData({total:resp.countrydata[0].total_cases, recovered:resp.countrydata[0].total_recovered,
-                    totalDeath:resp.countrydata[0].total_deaths, deathToday:resp.countrydata[0].total_new_deaths_today});
+                setData({total:resp.confirmed.value, recovered:resp.recovered.value,
+                    totalDeath:resp.deaths.value});
             }
         }
         fetchData();
@@ -69,7 +70,7 @@ function CountryWise(props){
                         <InputLabel htmlFor="countrySelect">Country</InputLabel>
                         <Select native inputProps={{  name: 'age',  id: 'countrySelect',}} value={cCode} onChange={getCountry}>
                         <option value="G">Global</option>
-                        {Object.keys(countries).map((c,id)=> <option key={id} value={countries[c].code}>{countries[c].title}</option>)}
+                        {countries.map((c,id)=> <option key={id} value={c.iso2}>{c.name}</option>)}
                         </Select>
                     </FormControl>
                 </Grid>

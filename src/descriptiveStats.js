@@ -52,10 +52,10 @@ function DescitptiveStats(props) {
     let [isLoading, setLoading] = useState(true);
     useEffect(()=>{
         async function fetchData(){
-            let resp = await fetch('https://api.thevirustracker.com/free-api?global=stats');
+            let resp = await fetch('https://covid19.mathdro.id/api');
             resp = await resp.json();
-            setDt({total:resp.results[0].total_cases, recovered:resp.results[0].total_recovered,
-                 totalDeath:resp.results[0].total_deaths, deathToday:resp.results[0].total_new_deaths_today});
+            setDt({total:resp.confirmed.value, recovered:resp.recovered.value,
+                 totalDeath:resp.deaths.value});
                  setLoading(false);
         }
         fetchData();
@@ -97,30 +97,24 @@ function DescitptiveStats(props) {
         </Grid>
       <div className={cx(classes.root,classes.pad)}>
       <Grid container spacing={2} alignItems="center" justify="center" className={classes.pad}>
-        <Grid item xs={12} sm={3}>
-          <Paper elevation="3" className={cx(classes.paper,classes.total)}>
+        <Grid item xs={12} sm={4}>
+          <Paper elevation={3} className={cx(classes.paper,classes.total)}>
               <Typography variant="h6">TOTAL</Typography>
               <CountUp start={0} end={dt.total} duration={3} separator=","/>
               </Paper>
         </Grid>
-        <Grid item xs={12} sm={3}>
-          <Paper elevation="3" className={cx(classes.paper,classes.recovered)}>
+        <Grid item xs={12} sm={4}>
+          <Paper elevation={3} className={cx(classes.paper,classes.recovered)}>
               <Typography variant="h6">RECOVERED</Typography>
               <CountUp start={0} end={dt.recovered} duration={3} separator=","/>
               </Paper>
         </Grid>
-        <Grid item xs={12} sm={3}>
-          <Paper elevation="3" className={cx(classes.paper,classes.death)}>
+        <Grid item xs={12} sm={4}>
+          <Paper elevation={3} className={cx(classes.paper,classes.death)}>
               <Typography variant="h6">TOTAL DEATHS</Typography>
               <CountUp start={0} end={dt.totalDeath} duration={3} separator=","/>
             </Paper>
         </Grid> 
-        <Grid item xs={12} sm={3} >
-          <Paper elevation="3" className={cx(classes.paper,classes.deathToday)}>
-              <Typography variant="h6">DEATHS TODAY</Typography>
-              <CountUp start={0} end={dt.deathToday} duration={3} separator=","/>
-              </Paper>
-        </Grid>
       </Grid>
     </div>
     </div>

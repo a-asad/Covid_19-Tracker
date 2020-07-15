@@ -5,7 +5,7 @@ import Chart from './chart'
 import { Header } from './Header';
 
 function App() {
-  let [data, setData] = useState({total:0, recovered:0, totalDeath:0, deathToday:0});
+  let [data, setData] = useState({total:0, recovered:0, totalDeath:0});
   return (
     <div>
       <Header/>
