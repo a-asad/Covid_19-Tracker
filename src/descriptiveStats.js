@@ -98,7 +98,7 @@ function DescitptiveStats(props) {
         </Grid>
         <Grid container justify="center" style={{paddingTop:20}}>
             <Grid item>
-                <img src={guide} width={'100%'}/>
+                <img src={guide} width={'100%'} alt='covid-19 information'/>
             </Grid>
         </Grid>
       <div className={cx(classes.root,classes.pad)}>
