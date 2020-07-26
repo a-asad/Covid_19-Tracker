@@ -6,12 +6,13 @@ import { Header } from './Header';
 
 function App() {
   let [data, setData] = useState({total:0, recovered:0, totalDeath:0});
+  let [country, setCountry] = useState('');
   return (
     <div>
       <Header/>
       <DescitptiveStats data = {data} setData = {setData}/>
-      <CountryWise setData = {setData}/>
-      <Chart data = {data}/>
+      <CountryWise setData = {setData} setCountry={setCountry}/>
+      <Chart data = {data} country = {country}/>
     </div>
   );
 }

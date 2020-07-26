@@ -44,14 +44,15 @@ function CountryWise(props){
         setCcode(c);
         async function fetchData(){
             if(c === 'G'){
+                props.setCountry('');
                 let resp = await fetch('https://covid19.mathdro.id/api');
                 resp = await resp.json();
                 setData({total:resp.confirmed.value, recovered:resp.recovered.value,
                      totalDeath:resp.deaths.value});
             }
             else{
+                props.setCountry(c);
                 let resp = await fetch('https://covid19.mathdro.id/api/countries/'+c);
-                
                 resp = await resp.json();
                 setData({total:resp.confirmed.value, recovered:resp.recovered.value,
                     totalDeath:resp.deaths.value});

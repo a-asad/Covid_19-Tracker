@@ -6,6 +6,7 @@ import { Typography } from '@material-ui/core';
 import cx from 'classnames';
 import CountUp from 'react-countup';
 import as from './as.gif';
+import guide from './covid.jpg';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,28 +21,28 @@ const useStyles = makeStyles((theme) => ({
     padding: "20px",
   },
   active:{
-      borderTop: "2px solid #9e5c5c",
-      borderBottom: "2px solid #9e5c5c",
+      borderTop: "3px solid #9e5c5c",
+      borderBottom: "3px solid #9e5c5c",
       color:"black",
   },
     total:{
-        borderTop: "2px solid #ccc",
-        borderBottom: "2px solid #ccc",
+        borderTop: "3px solid #66f",
+        borderBottom: "3px solid #66f",
         color:"black",
     },
     recovered:{
-        borderTop: "2px solid #114701",
-        borderBottom: "2px solid #114701",
+        borderTop: "3px solid #114701",
+        borderBottom: "3px solid #114701",
         color:"black",
     },
     death:{
-        borderTop: "2px solid #a60000",
-        borderBottom: "2px solid #a60000",
+        borderTop: "3px solid #a60000",
+        borderBottom: "3px solid #a60000",
         color:"black",
     },
     deathToday:{
-        borderTop: "2px solid #802828",
-        borderBottom: "2px solid #802828",
+        borderTop: "3px solid #802828",
+        borderBottom: "3px solid #802828",
         color:"black",
     }
 }));
@@ -64,7 +65,7 @@ function DescitptiveStats(props) {
     if(isLoading){
         return(
             <Grid container justify="center" direction="column" alignItems="center">
-                <Grid container justify="center" alignItems="center" className={classes.pad}>
+                <Grid container justify="center" alignItems="center">
                     <Grid item>
                         <Typography variant="h4">C</Typography>
                     </Grid>
@@ -93,6 +94,11 @@ function DescitptiveStats(props) {
             </Grid>
             <Grid item>
                 <Typography variant="h4">VID-19 TRACKER</Typography>
+            </Grid>
+        </Grid>
+        <Grid container justify="center" style={{paddingTop:20}}>
+            <Grid item>
+                <img src={guide} width={'100%'}/>
             </Grid>
         </Grid>
       <div className={cx(classes.root,classes.pad)}>
