@@ -5,8 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
 import cx from 'classnames';
 import CountUp from 'react-countup';
-import as from './as.gif';
-import guide from './covid.jpg';
+import as from './as.webp';
+import guide from './covid.webp';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -103,19 +103,19 @@ function DescitptiveStats(props) {
         </Grid>
       <div className={cx(classes.root,classes.pad)}>
       <Grid container spacing={2} alignItems="center" justify="center" className={classes.pad}>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={4} md={3}>
           <Paper elevation={3} className={cx(classes.paper,classes.total)}>
               <Typography variant="h6">TOTAL</Typography>
               <CountUp start={0} end={dt.total} duration={3} separator=","/>
               </Paper>
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={4} md={3}>
           <Paper elevation={3} className={cx(classes.paper,classes.recovered)}>
               <Typography variant="h6">RECOVERED</Typography>
               <CountUp start={0} end={dt.recovered} duration={3} separator=","/>
               </Paper>
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={4} md={3}>
           <Paper elevation={3} className={cx(classes.paper,classes.death)}>
               <Typography variant="h6">TOTAL DEATHS</Typography>
               <CountUp start={0} end={dt.totalDeath} duration={3} separator=","/>
